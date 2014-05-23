@@ -3,8 +3,21 @@
 #   the COPYRIGHT file.
 
 require 'sidekiq/web'
+#----------------------------Phuc----------------------------------------------
+#In the following comments, "all actions" means that method supports 7 actions:
+#   index: default which is usually display all of content (posts)
+#   create: has no view, just save new post to database
+#   new: has view, displays a new form to submit post (like message form)
+#   edit: has view, displays form to edit post
+#   show: has view, displays individual post
+#   update: has no view, update information to database. Again this similar with create
+#   destroy: delete the post
+#-----------------------------Phuc------------------------------------------------
 
 Diaspora::Application.routes.draw do
+
+
+
   resources :post_report, :except => [:edit]
 
   if Rails.env.production?
@@ -20,9 +33,9 @@ Diaspora::Application.routes.draw do
 
   get 'oembed' => 'posts#oembed', :as => 'oembed'
   # Posting and Reading
-  resources :reshares
+  resources :reshares 
 
-  resources :status_messages, :only => [:new, :create]
+  resources :status_messages, :only => [:new, :create] #Phuc message status method only providing user to create a new form to of message and then saves it in to database. So how can it display to another user
 
   resources :posts do
     member do
@@ -32,10 +45,10 @@ Diaspora::Application.routes.draw do
     end
 
     resources :poll_participations, :only => [:create]
-
-    resources :likes, :only => [:create, :destroy, :index ]
+    resources :likes, :only => [:create, :destroy, :index ] 
     resources :participations, :only => [:create, :destroy, :index]
     resources :comments, :only => [:new, :create, :destroy, :index]
+    resources :groupbadge, :only => [:create, :index, :target, ]
   end
 
 
@@ -57,9 +70,10 @@ Diaspora::Application.routes.draw do
   get "public" => "streams#public", :as => "public_stream"
   get "followed_tags" => "streams#followed_tags", :as => "followed_tags_stream"
   get "mentions" => "streams#mentioned", :as => "mentioned_stream"
-  get "liked" => "streams#liked", :as => "liked_stream"
-  get "commented" => "streams#commented", :as => "commented_stream"
-  get "aspects" => "streams#aspects", :as => "aspects_stream"
+  get "liked" => "streams#liked", :as => "liked_stream"  
+  get "commented" => "streams#commented", :as => "commented_stream" 
+  get "aspects" => "streams#aspects", :as => "aspects_stream" 
+  get "groupbadge" => "streams#groupbadge", :as => "groupbadge_stream"
 
   resources :aspects do
     put :toggle_contact_visibility
@@ -132,8 +146,8 @@ Diaspora::Application.routes.draw do
     get   "add_invites/:invite_code_id" => 'admins#add_invites', :as => 'add_invites'
   end
 
-  resource :profile, :only => [:edit, :update]
-  resources :profiles, :only => [:show]
+  resource :profile, :only => [:edit, :update] #Phuc enable to edit and update data to database
+  resources :profiles, :only => [:show] 
 
 
   resources :contacts,           :except => [:update, :create] do
@@ -220,4 +234,14 @@ Diaspora::Application.routes.draw do
 
   # Startpage
   root :to => 'home#show'
+
+  get "groupbadge/create"
+
+  get "groupbadge/index"
+
+  get "groupbadge/target"
+
+  get "groupbadge/voteup"
+
+  get "groupbadge/voteddown"
 end

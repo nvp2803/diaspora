@@ -38,6 +38,21 @@
               =t('.bio')
             %div{ :class => direction_for(person.bio) }
               = person.profile.bio_message.markdownified
+        - unless person.bio.blank?
+          %li
+            %h4
+              =t('.Groupbadge')
+              .item_count 
+                = "#{@photos.count}" 
+
+        - unless person.bio.blank?
+          %li
+            %h4
+              =t('.PeopleAround')
+              .item_count 
+                = "#{@photos.count}" 
+          
+
         - unless person.profile.location.blank?
           %li
             %h4

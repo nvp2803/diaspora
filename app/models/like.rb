@@ -21,6 +21,7 @@ class Like < Federated::Relayable
     self.parent.update_likes_counter
   end
 
+
   xml_attr :positive
 
   # NOTE API V1 to be extracted
