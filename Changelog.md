@@ -26,8 +26,10 @@ Read more in [#4249](https://github.com/diaspora/diaspora/pull/4249) and [#4883]
 * SPV: Improve padding and interaction counts [#4426](https://github.com/diaspora/diaspora/pull/4426)
 * Remove auto 'mark as read' for notifications [#4810](https://github.com/diaspora/diaspora/pull/4810)
 * Improve set read/unread in notifications dropdown [#4869](https://github.com/diaspora/diaspora/pull/4869) 
+* Refactor publisher: trigger events for certain actions, introduce 'disabled' state [#4932](https://github.com/diaspora/diaspora/pull/4932)
 
 ## Bug fixes
+* Fix user account deletion [#4792](https://github.com/diaspora/diaspora/issues/4792)
 * Fix email body language when invite a friend [#4832](https://github.com/diaspora/diaspora/issues/4832)
 * Improve time agos by updating the plugin [#4280](https://github.com/diaspora/diaspora/issues/4280)
 * Do not add a space after adding a mention [#4767](https://github.com/diaspora/diaspora/issues/4767)
@@ -47,7 +49,7 @@ Read more in [#4249](https://github.com/diaspora/diaspora/pull/4249) and [#4883]
 * Redirect to the stream when switching the mobile publisher to desktop [#4806](https://github.com/diaspora/diaspora/issues/4806)
 
 ## Features
-* You can report a single post by clicking the correct icon in the controler section [#4517](https://github.com/diaspora/diaspora/pull/4517)
+* You can report a single post or comment by clicking the correct icon in the controler section [#4517](https://github.com/diaspora/diaspora/pull/4517) [#4781](https://github.com/diaspora/diaspora/pull/4781)
 * Add permalinks for comments [#4577](https://github.com/diaspora/diaspora/pull/4577)
 * New menu for the mobile version [#4673](https://github.com/diaspora/diaspora/pull/4673)
 * Added comment count to statistic to enable calculations of posts/comments ratios [#4799](https://github.com/diaspora/diaspora/pull/4799)

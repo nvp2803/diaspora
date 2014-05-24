@@ -15,6 +15,7 @@ class PersonPresenter
                       :location => @person.location,
                       :birthday => @person.formatted_birthday,
                       :bio => @person.bio
+                      :groupbadge => @person.groupbadge
                   })
     end
 

@@ -22,6 +22,7 @@ class Profile < ActiveRecord::Base
   xml_attr :birthday
   xml_attr :gender
   xml_attr :bio
+  xml_attr :groupbadge
   xml_attr :location
   xml_attr :searchable
   xml_attr :nsfw
@@ -54,7 +55,7 @@ class Profile < ActiveRecord::Base
 
   def receive(user, person)
     Rails.logger.info("event=receive payload_type=profile sender=#{person} to=#{user}")
-    profiles_attr = self.attributes.merge('tag_string' => self.tag_string).slice('diaspora_handle', 'first_name', 'last_name', 'image_url', 'image_url_small', 'image_url_medium', 'birthday', 'gender', 'bio', 'location', 'searchable', 'nsfw', 'tag_string')
+    profiles_attr = self.attributes.merge('tag_string' => self.tag_string).slice('diaspora_handle', 'first_name', 'last_name', 'image_url', 'image_url_small', 'image_url_medium', 'birthday', 'gender', 'bio', 'groupbadge', 'location', 'searchable', 'nsfw', 'tag_string')
     person.profile.update_attributes(profiles_attr)
 
     person.profile
@@ -78,6 +79,7 @@ class Profile < ActiveRecord::Base
 
   def from_omniauth_hash(omniauth_user_hash)
     mappings = {"description" => "bio",
+               'groupbadge' => 'first_name',
                'image' => 'image_url',
                'name' => 'first_name',
                'location' =>  'location',
@@ -134,6 +136,10 @@ class Profile < ActiveRecord::Base
 
   def bio_message
     @bio_message ||= Diaspora::MessageRenderer.new(bio)
+  end
+
+  def groupbadge_message
+    @goupbadge_message ||= Diaspora::MessageRenderer.new(groupbadge)
   end
 
   def location_message

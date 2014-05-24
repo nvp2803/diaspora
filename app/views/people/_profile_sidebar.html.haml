@@ -38,23 +38,24 @@
               =t('.bio')
             %div{ :class => direction_for(person.bio) }
               = person.profile.bio_message.markdownified
-        - unless person.bio.blank?
+
+        - if contact.sharing? || person == current_user.person
+          %li
+            %h4 Group badge
+            %p.see_all= link_to t('streams.aspects.title'), aspects_path, :class => 'hoverable', :rel => 'backbone', :data => {:stream => 'aspects'}
+            %ul#aspects_list
+
+        
           %li
             %h4
-              =t('.Groupbadge')
+              =t('People_around')
               .item_count 
-                = "#{@photos.count}" 
-
-        - unless person.bio.blank?
-          %li
-            %h4
-              =t('.PeopleAround')
-              .item_count 
-                = "#{@photos.count}" 
-          
-
-        - unless person.profile.location.blank?
-          %li
+                = all_contacts_count 
+              .section.contact_pictures
+              - current_user.contacts.limit(20).each do |contact|
+                = person_image_link contact.person, :size => :thumb_small
+                %p.see_all= link_to t('layouts.header.view_all'), contacts_path
+ 
             %h4
               =t('.location')
             %div{ :class => direction_for(person.location) }

@@ -3,22 +3,10 @@
 #   the COPYRIGHT file.
 
 require 'sidekiq/web'
-#----------------------------Phuc----------------------------------------------
-#In the following comments, "all actions" means that method supports 7 actions:
-#   index: default which is usually display all of content (posts)
-#   create: has no view, just save new post to database
-#   new: has view, displays a new form to submit post (like message form)
-#   edit: has view, displays form to edit post
-#   show: has view, displays individual post
-#   update: has no view, update information to database. Again this similar with create
-#   destroy: delete the post
-#-----------------------------Phuc------------------------------------------------
 
 Diaspora::Application.routes.draw do
 
-
-
-  resources :post_report, :except => [:edit]
+  resources :report, :except => [:edit, :new]
 
   if Rails.env.production?
     mount RailsAdmin::Engine => '/admin_panel', :as => 'rails_admin'
@@ -35,7 +23,7 @@ Diaspora::Application.routes.draw do
   # Posting and Reading
   resources :reshares 
 
-  resources :status_messages, :only => [:new, :create] #Phuc message status method only providing user to create a new form to of message and then saves it in to database. So how can it display to another user
+  resources :status_messages, :only => [:new, :create] 
 
   resources :posts do
     member do
@@ -217,6 +205,15 @@ Diaspora::Application.routes.draw do
       get "/tags/:name" => 'tags#show', :as => 'tag'
     end
   end
+  get "groupbadge/create"
+
+  get "groupbadge/index"
+
+  get "groupbadge/target"
+
+  get "groupbadge/voteup"
+
+  get "groupbadge/voteddown"
 
   get 'community_spotlight' => "contacts#spotlight", :as => 'community_spotlight'
   # Mobile site
