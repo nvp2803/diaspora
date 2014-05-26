@@ -53,10 +53,16 @@
               %li.hoverable
                 = link_to t('aspects.aspect_listings.add_an_aspect'), new_aspect_path, :class => "selectable new_aspect", :rel => "facebox"
 
-
-
-
- 
+          %li
+            %h4
+              =t('Total posts')
+              .item_count 
+                = all_posts
+          %li
+            %h4
+              =t('Total likes')
+              .item_count 
+                = all_posts 
           %li
             %h4
               =t('People_around')

@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
                 :only_sharing_count,
                 :tag_followings,
                 :tags,
+                :all_posts,
+                :all_likes,
                 :open_publisher
 
   layout ->(c) { request.format == :mobile ? "application" : "centered_with_header_with_footer" }
@@ -63,6 +65,14 @@ class ApplicationController < ActionController::Base
     @tags ||= current_user.followed_tags
   end
 
+  def all_posts
+    @all_posts ||= @current_user.posts.count    
+  end
+
+  def all_likes
+    @all_likes ||= @current_user.likes.count  
+  end
+    
   def ensure_page
     params[:page] = params[:page] ? params[:page].to_i : 1
   end
