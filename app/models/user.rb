@@ -49,7 +49,10 @@ class User < ActiveRecord::Base
   belongs_to  :auto_follow_back_aspect, :class_name => 'Aspect'
   belongs_to :invited_by, :class_name => 'User'
 
-  has_many :aspect_memberships, :through => :aspects
+  has_many :aspect_memberships, :through => :aspects  ##the association to a group through a badge is also possible but due to business constraints, this may not neccessarily be so
+  
+  has_many  :groupbadges #the association to a group through a badge is also possible but due to business constraints, this may not neccessarily be so 
+
 
   has_many :contacts
   has_many :contact_people, :through => :contacts, :source => :person

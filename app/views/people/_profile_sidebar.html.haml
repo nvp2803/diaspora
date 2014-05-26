@@ -31,7 +31,6 @@
 
     -if contact.sharing? || person == current_user.person
       %ul#profile_information
-
         - unless person.bio.blank?
           %li
             %h4
@@ -40,19 +39,31 @@
               = person.profile.bio_message.markdownified
 
         - if contact.sharing? || person == current_user.person
-          %li
-            %h4 Group badge
-            %p.see_all= link_to t('streams.aspects.title'), aspects_path, :class => 'hoverable', :rel => 'backbone', :data => {:stream => 'aspects'}
-            %ul#aspects_list
+          %h4 Groudbadge
+          %ul#aspect_nav
+            %ul.sub_nav#aspects_list
+              - all_aspects.each do |aspect|
+                %li.hoverable{:data => {:aspect_id => aspect.id}, :class => ("active" if params["a_id"].to_i == aspect.id)}
+                  .item_count
+                    = aspect.contacts.size
+                  .icons-check_yes_ok{:class => ("selected" if params["a_id"].to_i == aspect.id) }
+                  %a.selectable{:href => contacts_path(:a_id => aspect.id)}
+                    = aspect
 
-        
+              %li.hoverable
+                = link_to t('aspects.aspect_listings.add_an_aspect'), new_aspect_path, :class => "selectable new_aspect", :rel => "facebox"
+
+
+
+
+ 
           %li
             %h4
               =t('People_around')
               .item_count 
                 = all_contacts_count 
               .section.contact_pictures
-              - current_user.contacts.limit(20).each do |contact|
+              - current_user.contacts.limit(20) do |contact|
                 = person_image_link contact.person, :size => :thumb_small
                 %p.see_all= link_to t('layouts.header.view_all'), contacts_path
  

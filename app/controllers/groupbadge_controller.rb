@@ -15,6 +15,14 @@ class GroupbadgeController < ApplicationController
   end
 
   def index
+    result = []
+    next_id = nil
+    while result.length <100
+      data = User.groupbadge()
+      next_id = data.pagination.next_max_id
+      result.concat(data)
+    end
+
   	@groupbadge = target.groupbadge.includes(:author => :profile)
     @people = @groupbadge.map(&:author)
 
