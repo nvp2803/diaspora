@@ -70,9 +70,19 @@ class ApplicationController < ActionController::Base
   end
 
   def all_likes
-    @all_likes ||= @current_user.likes.count  
+    @all_likes ||= @current_user.posts.count #need to change
   end
-    
+
+  def rank(arr)
+    count = {}
+    arr.each{|item| count[item] = (count[item]||0) + 1}
+    rank = 1 # initial ranking
+    ranking = {}
+    count.keys.sort.reverse.each{|item| ranking[item] = rank; rank += count[item]}
+    arr.map{|item| ranking[item]}
+  end
+ 
+
   def ensure_page
     params[:page] = params[:page] ? params[:page].to_i : 1
   end

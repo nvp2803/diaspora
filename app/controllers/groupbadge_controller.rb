@@ -40,13 +40,13 @@ class GroupbadgeController < ApplicationController
 
   def voteup
   	@totallike = likes.find(params[:id])
- 	  @totallike.ups=@likes.ups+1
+ 	  @totallike.ups=@totallike.ups+1
  	  @totallike.save
  	  render :text => "<div class='up'></div>"
   end
   def voteddown
   	@totallike = likes.find(params[:id])
-    @totallike.downs=@likes.downs+1
+    @totallike.downs=@totallike.downs+1
  	  @totallike.save
  	  render :text => "<div class='down'></div>"
   end
