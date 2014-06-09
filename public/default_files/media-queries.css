@@ -1,0 +1,47 @@
+/*                */
+/* Screen > 767px */
+/*                */
+
+
+@media (min-width: 768px) {
+  .navbar {
+    background: transparent;
+    border: none;
+    margin-top: -90px;
+  }
+
+  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover {
+    background-color: #738C62;
+    border-radius: 20px;
+  }
+
+  .navbar-default .navbar-nav>li>a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    border-radius: 20px;
+}
+
+  .navbar-default .navbar-nav>li>a:hover {
+   background-color: #738C62;
+   border-radius: 20px;
+  }
+
+  .navbar-nav>li {
+    padding-right: 20px;
+  }
+}
+
+/*                 */
+/*  Screen < 767px */
+/*                 */
+
+@media (max-width: 767px)  {
+  .navbar-nav li a{
+    color: #333 !important;
+  }
+  .col-sm-4>h2 {
+    text-align: center;
+  }
+}

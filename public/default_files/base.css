@@ -1,0 +1,53 @@
+/*            */
+/*   Helpers  */
+/*            */
+
+
+.top-buffer {
+  padding-top: 20px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.jumbotron {
+	padding-top: 36;
+	padding-bottom: 70px;
+	background-image: url(../images/header_image.jpg);
+  background-size: cover;
+}
+
+.jumbotron p {
+	color: #fff;
+}
+
+.thumbnail {
+    border: 0 none;
+    box-shadow: none;
+}
+
+
+/*          */
+/* CAROUSEL */
+/*          */
+
+.carousel-caption a, .carousel-caption a:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+.item img{
+	max-height: 375px;
+  margin: 0 auto;
+}
+
+.img-circle {
+	margin: 0 auto;
+  display: block;
+  width: 65%;
+}
+
+.feature-align {
+  margin: 0 auto;
+}
