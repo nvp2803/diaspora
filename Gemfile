@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.18'
 
 # Appserver
+gem 'pg'
+
+gem 'thin'
 
 gem 'unicorn', '4.8.0', :require => false
 
