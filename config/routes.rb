@@ -36,7 +36,7 @@ Diaspora::Application.routes.draw do
     resources :likes, :only => [:create, :destroy, :index ] 
     resources :participations, :only => [:create, :destroy, :index]
     resources :comments, :only => [:new, :create, :destroy, :index]
-    resources :groupbadge, :only => [:create, :index, :target, ]
+    resources :groupbadge, :only => [:create, :index, :target]
   end
 
 
@@ -134,7 +134,7 @@ Diaspora::Application.routes.draw do
     get   "add_invites/:invite_code_id" => 'admins#add_invites', :as => 'add_invites'
   end
 
-  resource :profile, :only => [:edit, :update] #Phuc enable to edit and update data to database
+  resource :profile, :only => [:edit, :update] 
   resources :profiles, :only => [:show] 
 
 
@@ -205,16 +205,7 @@ Diaspora::Application.routes.draw do
       get "/tags/:name" => 'tags#show', :as => 'tag'
     end
   end
-  get "groupbadge/create"
-
-  get "groupbadge/index"
-
-  get "groupbadge/target"
-
-  get "groupbadge/voteup"
-
-  get "groupbadge/voteddown"
-
+ 
   get 'community_spotlight' => "contacts#spotlight", :as => 'community_spotlight'
   # Mobile site
 

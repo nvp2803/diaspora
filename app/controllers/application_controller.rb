@@ -3,6 +3,7 @@
 #   the COPYRIGHT file.
 
 class ApplicationController < ActionController::Base
+  #class << self
   has_mobile_fu
   protect_from_forgery :except => :receive
 
@@ -24,6 +25,7 @@ class ApplicationController < ActionController::Base
                 :tags,
                 :all_posts,
                 :all_likes,
+                :rank,
                 :open_publisher
 
   layout ->(c) { request.format == :mobile ? "application" : "centered_with_header_with_footer" }
@@ -70,18 +72,13 @@ class ApplicationController < ActionController::Base
   end
 
   def all_likes
-    @all_likes ||= @current_user.posts.count #need to change
+    @all_likes = @current_user.posts(:likes).count
+    #@current_user.contacts(:order => "all_posts").index(@current_user)
   end
 
-  def rank(arr)
-    count = {}
-    arr.each{|item| count[item] = (count[item]||0) + 1}
-    rank = 1 # initial ranking
-    ranking = {}
-    count.keys.sort.reverse.each{|item| ranking[item] = rank; rank += count[item]}
-    arr.map{|item| ranking[item]}
+  def rank
+    @rank ||= @current_user.posts.count
   end
- 
 
   def ensure_page
     params[:page] = params[:page] ? params[:page].to_i : 1

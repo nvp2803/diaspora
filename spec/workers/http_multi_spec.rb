@@ -78,7 +78,7 @@ describe Workers::HttpMulti do
     Typhoeus.stub(person.receive_url).and_return @unable_to_resolve_response
 
     Workers::HttpMulti.should_receive(:perform_in).with(1.hour, bob.id, @post_xml, [person.id], anything, 1).once
-    Workers::HttpMulti.new.perform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
+    Workers::HttpMulti.new.lperform bob.id, @post_xml, [person.id], "Postzord::Dispatcher::Private"
   end
 
   it 'does not retry on an SSL error' do
